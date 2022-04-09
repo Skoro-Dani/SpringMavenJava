@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBconnection {
-	private static String dbhost = "jdbc:mysql://localhost:3306/5ai_skoro_WebService";
+	private static String dbhost = "jdbc:mysql://localhost:3306/5a_skoro_WebService";
 	private static String username = "root";
 	private static String password = "";
 	private static Connection conn;

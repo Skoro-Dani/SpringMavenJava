@@ -1,0 +1,93 @@
+PRIMA DI QUALSIASI DOMANDA, LEGGERE ATTENTAMENTE LA DOCUMENTAZIONE E FARE DEI TEST TRAMITE BROWSER!
+
+	è un servizio, che previa registrazione, permette di salvare delle stringhe ( identificate da una "key" ) e recuperarle in un secondo momento.
+	Tutte le funzioni di questo servizio sono strutturate da ritornare un JSON contenente:
+
+	- status ( "ok" o "error" ) 
+	- result ( se lo status è "ok" ) 
+	- message ( se lo status è "error" ) 
+
+	il value varia in base al tipo di richiesta
+
+
+	il servizio presenta le seguenti funzioni:
+	
+	- register.php - permette di registrarsi al servizio con username e passord
+		Parametri GET:  
+		- username ( string )  
+		- password ( string ) 
+		
+		se i parametri sono errati o l'utente è già presente viene ritornato un "error" con il relativo messaggio
+
+	- getToken.php - permette di recuperare il token da utilizzare per le successive richieste
+		Parametri GET:  
+		- username ( string )  
+		- password ( string ) 
+		
+		
+		se i parametri sono errati o user/pass sono sbagliati viene ritornato un "error" con il relativo messaggio
+
+		ATTENZIONE!: ogni qual volta che il token viene generato, il token precedente viene cancellato!
+
+	- setString.php - permette di salvare/impostare una stringa
+		Parametri GET:  
+		- token ( string )  
+		- key ( string ) 
+		- string ( string ) 
+		
+		
+		se i parametri sono errati viene ritornato un "error" con il relativo messaggio
+
+
+	- getString.php - permette di ritornare una stringa data la sua key
+		Parametri GET:  
+		- token ( string )  
+		- key ( string ) 
+		
+		
+		se i parametri sono errati o la key non esiste viene ritornato un "error" con il relativo messaggio
+
+
+	- deleteString.php - permette di rimuovere una string data la sua key
+		Parametri GET:  
+		- token ( string )  
+		- key ( string ) 
+		
+		
+		se i parametri sono errati viene ritornato un "error" con il relativo messaggio
+
+
+	- getKeys.php - ritorna la lista di key associati al token specificato
+		Parametri GET:  
+		- token ( string )  
+		
+		
+		se i parametri sono errati viene ritornato un "error" con il relativo messaggio
+
+
+
+
+
+test:
+
+http://HOST_CATTEDRA/SaveStrings/register.php?username=aaa&password=bbb
+	registra l'utente "aaa" con password "bbb"
+
+http://HOST_CATTEDRA/SaveStrings/getToken.php?username=aaa&password=bbb
+	ottiene il token relativo all'utente "aaa" con pass "bbb"
+	( immaginiamo -> 697ab188731ec4861e1eb72eca7a18d2 ) 
+	
+http://HOST_CATTEDRA/SaveStrings/setString.php?token=697ab188731ec4861e1eb72eca7a18d2&key=IDENTIFICATIVO&string=HELLO_WORLD
+	permette di settare nell'account relativo al token 697ab188731ec4861e1eb72eca7a18d2 
+	una stringa identificata ( key ) da "IDENTIFICATIVO" e contenente "HELLO_WORLD"
+
+http://HOST_CATTEDRA/SaveStrings/getString.php?token=697ab188731ec4861e1eb72eca7a18d2&key=IDENTIFICATIVO
+	permette di leggere il contenuto della stringa identificata dalla key "IDENTIFICATIVO" 
+	presente nell'account relativo al token 697ab188731ec4861e1eb72eca7a18d2
+	
+http://HOST_CATTEDRA/SaveStrings/deleteString.php?token=697ab188731ec4861e1eb72eca7a18d2&key=IDENTIFICATIVO
+	permette di cancellare la stringa identificata dalla key "IDENTIFICATIVO" 
+	presente nell'account relativo al token 697ab188731ec4861e1eb72eca7a18d2
+	
+http://HOST_CATTEDRA/SaveStrings/getKeys.php?token=697ab188731ec4861e1eb72eca7a18d2
+	permette di ottenere la lista di tutte le key presenti nell'account relativo al token 697ab188731ec4861e1eb72eca7a18d2
