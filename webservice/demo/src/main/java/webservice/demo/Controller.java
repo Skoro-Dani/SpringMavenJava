@@ -9,11 +9,13 @@ import java.io.*;
 import org.json.JSONObject;
 //import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class Controller {
 
